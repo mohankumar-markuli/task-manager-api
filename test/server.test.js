@@ -8,6 +8,7 @@ tap.test("POST /tasks", async (t) => {
     title: "New Task",
     description: "New Task Description",
     completed: false,
+    priority:"low"
   };
   const response = await server.post("/tasks").send(newTask);
   t.equal(response.status, 201);
@@ -30,10 +31,13 @@ tap.test("GET /tasks", async (t) => {
   t.hasOwnProp(response.body[0], "title");
   t.hasOwnProp(response.body[0], "description");
   t.hasOwnProp(response.body[0], "completed");
+  t.hasOwnProp(response.body[0], "priority");
   t.type(response.body[0].id, "number");
   t.type(response.body[0].title, "string");
   t.type(response.body[0].description, "string");
   t.type(response.body[0].completed, "boolean");
+  t.type(response.body[0].priority, "string");
+
   t.end();
 });
 
@@ -45,6 +49,7 @@ tap.test("GET /tasks/:id", async (t) => {
     title: "Set up environment",
     description: "Install Node.js, npm, and git",
     completed: true,
+    priority: "high"
   };
   t.match(response.body, expectedTask);
   t.end();
@@ -61,6 +66,7 @@ tap.test("PUT /tasks/:id", async (t) => {
     title: "Updated Task",
     description: "Updated Task Description",
     completed: true,
+    priority: "low"
   };
   const response = await server.put("/tasks/1").send(updatedTask);
   t.equal(response.status, 200);

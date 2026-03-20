@@ -1,6 +1,7 @@
 const express = require('express');
 const route = express.Router();
 const { getAllTasks,
+    getPriorityTask,
     getTaskById,
     createTask,
     updateTask,
@@ -13,6 +14,9 @@ route.use(express.urlencoded({ extended: true }));
 
 //  Implement GET /tasks: Retrieve all tasks.
 route.get('/', getAllTasks);
+
+//  Implement GET /tasks/priority/:level:: Retrieve priority tasks.
+route.get('/priority/:level', getPriorityTask);
 
 // Implement GET /tasks/:id: Retrieve a specific task by its ID.
 route.get('/:taskID', validateTaskId, getTaskById);
