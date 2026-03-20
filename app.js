@@ -8,6 +8,7 @@ const port = 3000;
 
 // Use the logger and error handling middleware for all routes
 app.use(logger);
+// global error handler
 app.use(errorHandler);
 
 // Import and use the task routes
