@@ -5,11 +5,11 @@ const server = supertest(app);
 
 tap.test("POST /tasks", async (t) => {
   const newTask = {
-    title: "New Task",
-    description: "New Task Description",
-    completed: false,
-    priority:"low"
-  };
+  title: "New Task",
+  description: "New Task Description",
+  completed: false,
+  priority: "low"
+};
   const response = await server.post("/tasks").send(newTask);
   t.equal(response.status, 201);
   t.end();
@@ -45,11 +45,12 @@ tap.test("GET /tasks/:id", async (t) => {
   const response = await server.get("/tasks/1");
   t.equal(response.status, 200);
   const expectedTask = {
-    id: 1,
-    title: "Set up environment",
-    description: "Install Node.js, npm, and git",
-    completed: true,
-    priority: "high"
+      id: 1,
+      title: "Set up environment",
+      description: "Install Node.js, npm, and git",
+      completed: true,
+      priority: "high",
+      createdAt: "2024-01-05T10:00:00.000Z"
   };
   t.match(response.body, expectedTask);
   t.end();
